@@ -1,6 +1,8 @@
-java_codegen is a preprocessor for Java source code.
+## java_codegen - a preprocessor for Java source code.
 
 You add special line comments opened by  `// [$ ... $] ` or  `//[$ ... $] ` and closed by `// $$` or `//$$` into the code, then run the preprocessor.
+
+### Example
 
 There is an example [org.matheclipse.tools.HelloWorldExample](https://github.com/axkr/java_codegen/blob/master/java_codegen/java_codegen/src/org/matheclipse/tools/HelloWorldExample.java) which converts the follwing lines:
 
@@ -46,10 +48,10 @@ For implementing your own conversion you have to implement the abstract `apply()
 		return true;
 	}
 ```
+## Symja math expression code generation
 
 There is already a more sophisticated tool [ExprPreprocessor](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/tools/src/main/java/org/matheclipse/core/preprocessor/ExprPreprocessor.java) 
- in the [Symja project](https://github.com/axkr/symja_android_library), which converts math expressions in Java line comments opened by 
- `// [$ ... $] ` or  `//[$ ... $] ` and closed by `// $$` or `//$$` into Java source code.
+ in the [Symja project](https://github.com/axkr/symja_android_library), which converts math expressions into Java source code.
 
 In the example from the [TrigToExp ](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/matheclipse-core/src/main/java/org/matheclipse/core/reflection/system/TrigToExp.java) 
 function the Symja expression `2/(E^x-E^(-x))` 
@@ -60,7 +62,7 @@ function the Symja expression `2/(E^x-E^(-x))`
  		F.Null); // $$);
 ```
 
-will be converted into Java source code
+will be converted into special Symja Java source code
 ```
  MATCHER.caseOf(Csch(x_), //
   		x -> // [$ 2/(E^x-E^(-x)) $]
