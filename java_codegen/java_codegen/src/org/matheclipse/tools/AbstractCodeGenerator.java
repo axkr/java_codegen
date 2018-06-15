@@ -11,10 +11,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 /**
+ * <p>
  * Convert expressions in line comments opened by <code>// [$ ... $]</code> and closed by <code>// $$</code> into Java
  * source code. The closing tag can be followed by postfix characters which are appended after the genreated source
  * code.
- * 
+ * </p>
+ * <p>
+ * See github project <a href="https://github.com/axkr/java_codegen">java_codegen</a>
+ * </p>
  */
 public abstract class AbstractCodeGenerator {
 
@@ -56,7 +60,6 @@ public abstract class AbstractCodeGenerator {
 		// File sourceLocation = new File("..\\symja_android_library\\rules");
 		String inputExpression;
 		String trimmedInput;
-		System.out.println("Input qualified Java file for converting Symja expressions to Java source");
 		while (true) {
 			try {
 				inputExpression = readString();
