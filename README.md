@@ -2,6 +2,9 @@
 
 You add special line comments opened by  `// [$ ... $] ` or  `//[$ ... $] ` and closed by `// $$` or `//$$` into the code, then run the preprocessor.
 
+- [Example](#example) 
+- [Symja math expression code generation](#symja-math-expression-code-generation)
+
 ### Example
 
 There is an example [org.matheclipse.tools.HelloWorldExample](https://github.com/axkr/java_codegen/blob/master/java_codegen/java_codegen/src/org/matheclipse/tools/HelloWorldExample.java) which converts the follwing lines:
