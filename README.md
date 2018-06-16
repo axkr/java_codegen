@@ -35,7 +35,7 @@ public class HelloWorldExample extends AbstractCodeGenerator {
 "HELLO WORLD 2"; // $$;
 ```
 
-The `;` character behind the closing `// $$` tag will be appended to the generated source code.
+**Note:** the `;` character behind the closing `// $$` tag will be appended to the generated source code.
 
 After running the `HelloWorldExample` you can use the Eclipse menu "Copy qualified name" for the file which you would like to convert:
 
