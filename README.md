@@ -6,7 +6,7 @@ The strings are included into Java line comments opened by `// [$ ... $]` or `//
 
 ### Simple Uppercase Example
 
-There is a simple example [org.matheclipse.tools.HelloWorldExample](https://github.com/axkr/java_codegen/blob/master/java_codegen/java_codegen/src/org/matheclipse/tools/HelloWorldExample.java) which converts the following lines into upper case strings:
+There is a simple example [org.matheclipse.tools.HelloWorldExample](https://github.com/axkr/java_codegen/blob/master/java_codegen/java_codegen/src/org/matheclipse/tools/HelloWorldExample.java) which converts the following lines:
 
 ```
 public class HelloWorldExample extends AbstractCodeGenerator {
@@ -20,7 +20,7 @@ public class HelloWorldExample extends AbstractCodeGenerator {
 			"test 2"; // $$;
 ```
 
-to these lines:
+into upper case strings in these lines:
 
 ```
 public class HelloWorldExample extends AbstractCodeGenerator {
@@ -54,12 +54,10 @@ For implementing your own conversion you have to implement the abstract `apply()
 ```
 ### Symja math expression code generation
 
-There is already a more sophisticated tool [ExprPreprocessor](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/tools/src/main/java/org/matheclipse/core/preprocessor/ExprPreprocessor.java) 
- in the [Symja project](https://github.com/axkr/symja_android_library), which converts math expressions into Java source code.
- Because Java doesn't support operator overloading the tool simplifies the maintenance of large math expressions.
+There is already a more sophisticated tool [ExprPreprocessor](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/tools/src/main/java/org/matheclipse/core/preprocessor/ExprPreprocessor.java) in the [Symja project](https://github.com/axkr/symja_android_library), which converts math expressions into Java source code.
+Because Java doesn't support operator overloading the tool simplifies the maintenance of large math expressions.
 
-In the example from the [FunctionExpand](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/matheclipse-core/src/main/java/org/matheclipse/core/reflection/system/FunctionExpand.java) 
-function the Symja expression `Gamma(1+x)` 
+In the example from the [FunctionExpand](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/matheclipse-core/src/main/java/org/matheclipse/core/reflection/system/FunctionExpand.java) function the Symja expression `Gamma(1+x)` 
 
 ```
 MATCHER.caseOf(Factorial(x_), //
@@ -74,3 +72,5 @@ MATCHER.caseOf(Factorial(x_), //
           // [$ Gamma(1+x) $]
           F.Gamma(F.Plus(F.C1, x))); // $$);
 ```
+
+**Note:** the `);` characters behind the closing `// $$` tag will be appended to the generated source code.
