@@ -1,13 +1,12 @@
-## java_codegen - a preprocessor for Java source code.
+## java_codegen - a simple preprocessor for Java source code.
 
-You add special line comments opened by  `// [$ ... $] ` or  `//[$ ... $] ` and closed by `// $$` or `//$$` into the code, then run the preprocessor.
+The [axkr/java_codegen](https://github.com/axkr/java_codegen) Github project contains a simple preprocessor tool to expand ordinary strings into Java source code.
 
-- [Example](#example) 
-- [Symja math expression code generation](#symja-math-expression-code-generation)
+The strings are included into Java line comments opened by `// [$ ... $]` or `//[$ ... $]` and closed by `// $$` or `//$$`. The preprocessor program takes this prepared files and substitutes the comments by generated source code. 
 
-### Example
+### Simple Uppercase Example
 
-There is an example [org.matheclipse.tools.HelloWorldExample](https://github.com/axkr/java_codegen/blob/master/java_codegen/java_codegen/src/org/matheclipse/tools/HelloWorldExample.java) which converts the follwing lines:
+There is a simple example [org.matheclipse.tools.HelloWorldExample](https://github.com/axkr/java_codegen/blob/master/java_codegen/java_codegen/src/org/matheclipse/tools/HelloWorldExample.java) which converts the following lines into upper case strings:
 
 ```
 public class HelloWorldExample extends AbstractCodeGenerator {
@@ -53,25 +52,25 @@ For implementing your own conversion you have to implement the abstract `apply()
 		return true;
 	}
 ```
-## Symja math expression code generation
+### Symja math expression code generation
 
 There is already a more sophisticated tool [ExprPreprocessor](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/tools/src/main/java/org/matheclipse/core/preprocessor/ExprPreprocessor.java) 
  in the [Symja project](https://github.com/axkr/symja_android_library), which converts math expressions into Java source code.
+ Because Java doesn't support operator overloading the tool simplifies the maintenance of large math expressions.
 
-In the example from the [TrigToExp ](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/matheclipse-core/src/main/java/org/matheclipse/core/reflection/system/TrigToExp.java) 
-function the Symja expression `2/(E^x-E^(-x))` 
+In the example from the [FunctionExpand](https://github.com/axkr/symja_android_library/blob/master/symja_android_library/matheclipse-core/src/main/java/org/matheclipse/core/reflection/system/FunctionExpand.java) 
+function the Symja expression `Gamma(1+x)` 
 
 ```
- MATCHER.caseOf(Csch(x_), //
-  		x -> // [$ 2/(E^x-E^(-x)) $]
- 		F.Null); // $$);
+MATCHER.caseOf(Factorial(x_), //
+          // [$ Gamma(1+x) $]
+          F.Null); // $$);
 ```
 
 will be converted into special Symja Java source code
-```
- MATCHER.caseOf(Csch(x_), //
-  		x -> // [$ 2/(E^x-E^(-x)) $]
- 		F.Times(F.C2, F.Power(F.Plus(F.Negate(F.Power(F.E, F.Negate(x))), F.Power(F.E, x)), -1))); // $$);
-```
 
-
+```
+MATCHER.caseOf(Factorial(x_), //
+          // [$ Gamma(1+x) $]
+          F.Gamma(F.Plus(F.C1, x))); // $$);
+```
